@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container-fluid mt-2">
+    <div class="container-fluid mt-2">
+      <form class="px-2 py-2" [formGroup]="searchForm">
+
+        <div class="form-group autocomplete col-md-4 offset-md-8">
+            <label for="exampleInputEmail1">Customer Name</label>
+            <div class="ng-autocomplete" style="width: 100% !important;">
+                <ng-autocomplete [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+                    (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate" formControlName="custName" placeHolder="Search Customer">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+      </form>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of tableData;let ind=index" >
+                <th scope="row">{{ind+1}}</th>
+                <td> <a style="cursor: pointer; color: #8dbaff;"  (click) = goToDetail(data.customerId)>{{data.name}}</a></td>
+                <td>{{data.mobile}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.address}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

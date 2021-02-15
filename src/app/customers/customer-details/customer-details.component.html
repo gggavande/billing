@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="loader" *ngIf = "isLoading"></div>
+
+<div class="container-fluid" *ngIf = "!isLoading">
+  <h2 class="mb-0">{{customerData.customerDetails.name}}</h2>
+
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      {{customerData.customerDetails.mobile}} <br>
+      {{customerData.customerDetails.email}}
+    </div>
+    <div class="col-md-6 text-right">
+      <strong>Total Amount: </strong>{{customerData.accTotals[0].totalAmt}} <br>
+      <strong>Received Amount: </strong>{{customerData.accTotals[0].recAmt}}<br>
+      <strong>Pending Amount: </strong>{{customerData.accTotals[0].pendingAmt}}
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Bill No.</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Amount Received</th>
+          <th scope="col">Amount Pending</th>
+          <th scope="col">GST Status</th>
+          <th scope="col">GST Amount</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of customerData.customerAccDetails; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td><a style="cursor: pointer; color: #8dbaff;"  (click) = viewBill(row.billId)>{{row.billNo}}</a></td>
+          <td>{{row.amount}}</td>
+          <td>{{row.amountReceived}}</td>
+          <td>{{row.amountPending}}</td>
+          <td>{{row.gstStatus == 1 ? "With Gst" : "Without GST"}}</td>
+          <td>{{row.gstAmount}}</td>
+          <td>{{row.status == 0 ? "Pending" : row.status == 1 ? "Paid" : "Partial Paid"}}</td>
+          <td>{{row.date.substring(0,10)}}</td>
+          <td>
+            <button class="btn btn-primary btn-sm mr-2" (click) = viewBill(row.billId)>View</button>
+            <button class="btn btn-warning btn-sm" (click) = editBill(row.billId)>Edit</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

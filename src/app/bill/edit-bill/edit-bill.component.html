@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="loader" *ngIf = "isLoading"></div>
+
+<div class="container col-md-6 col-md-offset-6 card mt-2 cardBG" *ngIf = "!isLoading">
+  <h3 style="text-align: center;">Bill Details</h3>
+  <form class="px-2 py-2" [formGroup]="billForm" (ngSubmit)="onSubmit(billForm)">
+      <input type="hidden" formControlName="noOfItem">
+      <input type="hidden" formControlName="billId">
+      <input type="hidden" formControlName="billNo">
+      <div class="form-group autocomplete">
+          <label for="exampleInputEmail1"><strong>Customer Name</strong></label><br>
+          <span>{{billDetails.customer.name}}</span>
+      </div>
+
+      <label><strong>Items</strong></label>
+      <div *ngIf = "item.length > 0">
+        <div class="form-row row" *ngFor="let itemRow of item; let i = index"><!-- *ngFor="let item of [].constructor(itemNo); let i = index" -->
+          <input type="hidden" formControlName="itemId{{i+1}}">
+          <div class="col-md-6 form-group">
+                <label for="">Item Name.</label>
+                <input type="text" class="form-control" id="item{{i+1}}" formControlName="item{{i+1}}" placeholder="Enter Item Name" >
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="">Rate.</label>
+                <input type="number" class="form-control" id="item{{i+1}}Rate" formControlName="item{{i+1}}Rate" placeholder="Rate" (keyup)="calcAmount(i+1)">
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="">Unit.</label>
+                <input type="number" class="form-control itemUnit" id="item{{i+1}}Unit" formControlName="item{{i+1}}Unit" placeholder="Unit" (keyup)="calcAmount(i+1)">
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="">Amount.</label>
+                <input  type="number" class="form-control" id="item{{i+1}}Price" formControlName="item{{i+1}}Price" placeholder="Price">
+            </div>
+        </div>
+
+        <div *ngIf = "newItemNo > 0">
+          <div class="form-row row" *ngFor="let itemRow of [].constructor(newItemNo); let i = index"><!-- *ngFor="let item of [].constructor(itemNo); let i = index" -->
+            <div class="col-md-6 form-group">
+                  <label for="">Item Name.</label>
+                  <input type="text" class="form-control" id="item{{item.length+1}}" formControlName="item{{item.length+1}}" placeholder="Enter Item Name" >
+              </div>
+              <div class="col-md-2 form-group">
+                  <label for="">Rate.</label>
+                  <input type="number" class="form-control" id="item{{item.length+1}}Rate" formControlName="item{{item.length+1}}Rate" placeholder="Rate" (keyup)="calcAmount(item.length+1)">
+              </div>
+              <div class="col-md-2 form-group">
+                  <label for="">Unit.</label>
+                  <input type="number" class="form-control itemUnit" id="item{{item.length+1}}Unit" formControlName="item{{item.length+1}}Unit" placeholder="Unit" (keyup)="calcAmount(item.length+1)">
+              </div>
+              <div class="col-md-2 form-group">
+                  <label for="">Amount.</label>
+                  <input  type="number" class="form-control" id="item{{item.length+1}}Price" formControlName="item{{item.length+1}}Price" placeholder="Price">
+              </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <a id="addItem" (click) = "addEle()"><small style="color: blue; cursor: pointer;">Add More Items<span>&#x2b;</span></small></a>
+        </div>
+
+        <label><strong>GST Status</strong></label>
+        <div class="radio">
+            <label class=""><input type="radio" formControlName="gst" value="1" checked>   With GST</label>
+            <label class="ml-3"><input type="radio" formControlName="gst" value="0"> Without GST</label>
+        </div>
+
+        <label><strong>Payment Status</strong></label>
+        <div class="radio">
+          <label class=""><input type="radio" formControlName="isPaid" value="0" [checked] = "billDetails.status == 0 ? true : 'false'">  Pending</label>
+          <label class="ml-3"><input type="radio" formControlName="isPaid" value="1" [checked] = "billDetails.status == 1 ? true : false"> Paid</label>
+          <label class="ml-3"><input type="radio" formControlName="isPaid" value="2" [checked] = "billDetails.status == 2 ? true : false"> Partial Paid</label>
+        </div>
+
+        <div *ngIf = "billForm.value.isPaid == 2 || billDetails.status == 2">
+          <label><strong>Amount Paid</strong></label>
+          <div class="col-md-2" style="padding-left: 0; padding-bottom: 2%;">
+            <input  type="number" class="form-control" id="amountReceived" formControlName="amountReceived" placeholder="Received Ammount">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" name="submit" class="btn btn-primary" [disabled] = "!billForm.valid">Submit</button>
+      <br><small style="text-align: center;" *ngIf="!billForm.valid" class=" text-danger">All field are required*</small>
+  </form>
+</div>
