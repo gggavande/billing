@@ -12,6 +12,8 @@ export class CustomerDetailsComponent implements OnInit {
   customerId : any;
   customerData : any;
   isLoading : boolean = true;
+  dtOptions: DataTables.Settings = {};
+
 
 
   constructor(private route : ActivatedRoute, private http : HttpClient , private router : Router) {
@@ -23,6 +25,10 @@ export class CustomerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCustomerDetails(1);
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
 
   }
 

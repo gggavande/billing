@@ -18,6 +18,7 @@ import { CustomerListingComponent } from './customers/customer-listing/customer-
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { ViewBillComponent } from './bill/view-bill/view-bill.component';
 import { EditBillComponent } from './bill/edit-bill/edit-bill.component';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EditBillComponent } from './bill/edit-bill/edit-bill.component';
     NgxPrintModule,
     AutocompleteLibModule,
     BrowserAnimationsModule,
+    DataTablesModule
   ],
   providers: [ValidationService],
   bootstrap: [AppComponent]

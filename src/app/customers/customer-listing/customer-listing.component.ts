@@ -24,6 +24,8 @@ export class CustomerListingComponent implements OnInit {
   customerList : any;
   data: any;
   keyword = 'name';
+  dtOptions: DataTables.Settings = {};
+  dtTrigger : any;
 
 
   constructor(private http : HttpClient , private router : Router, private route : ActivatedRoute,private fb: FormBuilder) {
@@ -32,6 +34,11 @@ export class CustomerListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCustomers(1);
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+
     this.searchForm = this.fb.group({
       custName: ['',Validators.required],
     });
