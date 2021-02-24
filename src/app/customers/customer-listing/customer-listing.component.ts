@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+
 
 export interface CustomerInt {
   customerId: number;
@@ -20,13 +22,14 @@ export interface CustomerInt {
 export class CustomerListingComponent implements OnInit {
 
   tableData : CustomerInt;
-  searchForm: any;
+  // searchForm: any;
   customerList : any;
   data: any;
   keyword = 'name';
-  dtOptions: DataTables.Settings = {};
-  dtTrigger : any;
-
+  dtOptions: any = {};
+  isLoading : boolean = true;
+  // dtTrigger : any;
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private http : HttpClient , private router : Router, private route : ActivatedRoute,private fb: FormBuilder) {
 
@@ -35,22 +38,33 @@ export class CustomerListingComponent implements OnInit {
   ngOnInit(): void {
     this.fetchCustomers(1);
     this.dtOptions = {
+
+      // Declare the use of the extension in the dom parameter
+      dom: 'Bfrtip',
+      // Configure the buttons
+      buttons: [
+        'print',
+        'excel',
+      ],
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
     };
 
-    this.searchForm = this.fb.group({
+
+    /* this.searchForm = this.fb.group({
       custName: ['',Validators.required],
-    });
+    }); */
   }
 
   fetchCustomers(page: number) {
     // page = 1;
     this.http.post('http://localhost/testslim_1/public/fetchCustomers',{q : page}).subscribe((response:any) => {
+      this.isLoading= false;
       // console.log(response);
       if(response.status == true){
         this.tableData = response.data;
       }
+      this.dtTrigger.next();
       // console.log(this.tableData);
     });
   }
@@ -65,7 +79,7 @@ export class CustomerListingComponent implements OnInit {
     this.data = [];
   }
 
-  selectEvent(item) {
+  /* selectEvent(item) {
     console.log(item);
     this.http.post('http://localhost/testslim_1/public/fetchCustomersSearch',{q : item}).subscribe((response:any) => {
       // console.log(response);
@@ -75,9 +89,9 @@ export class CustomerListingComponent implements OnInit {
       // console.log(this.tableData);
     });
     // do something with selected item
-  }
+  } */
 
-  onChangeSearch(val: string) {
+ /*  onChangeSearch(val: string) {
     this.http.post('http://localhost/testslim_1/public/getCustomerList',{q : val}).subscribe((response:any) => {
       console.log(response.data);
       if(response.status == true){
@@ -86,9 +100,9 @@ export class CustomerListingComponent implements OnInit {
         this.data = [];
       }
     });
-  }
+  } */
 
-  onFocused(e){
+  /* onFocused(e){
     // do something when input is focused
-  }
+  } */
 }

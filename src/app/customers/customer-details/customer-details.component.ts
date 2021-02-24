@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,9 @@ export class CustomerDetailsComponent implements OnInit {
   customerId : any;
   customerData : any;
   isLoading : boolean = true;
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
+
+  // dtTrigger: Subject<any> = new Subject<any>();
 
 
 
@@ -26,19 +29,27 @@ export class CustomerDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchCustomerDetails(1);
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
+      dom: 'Bfrtip',
+      // Configure the buttons
+      buttons: [
+        'print',
+        'excel'
+        ],
+        pagingType: 'full_numbers',
+        pageLength: 10,
+
     };
 
   }
 
   fetchCustomerDetails(page : number){
     this.http.post('http://localhost/testslim_1/public/fetchCustomerDetails',{q : page,customerId : this.customerId}).subscribe((response:any) => {
-      console.log(response);
+      // console.log(response);
       this.isLoading = false;
       if(response.status == true){
         this.customerData = response.data;
       }
+      // this.dtTrigger.next();
       // console.log(this.tableData);
     });
   }

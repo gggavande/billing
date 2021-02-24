@@ -10,9 +10,9 @@
       {{customerData.customerDetails.email}}
     </div>
     <div class="col-md-6 text-right">
-      <strong>Total Amount: </strong>{{customerData.accTotals[0].totalAmt}} <br>
-      <strong>Received Amount: </strong>{{customerData.accTotals[0].recAmt}}<br>
-      <strong>Pending Amount: </strong>{{customerData.accTotals[0].pendingAmt}}
+      <strong>Total Amount: </strong>{{customerData.accTotals[0].totalAmt ? customerData.accTotals[0].totalAmt : 0}} <br>
+      <strong>Received Amount: </strong>{{customerData.accTotals[0].recAmt ? customerData.accTotals[0].recAmt : 0}}<br>
+      <strong>Pending Amount: </strong>{{customerData.accTotals[0].pendingAmt ? customerData.accTotals[0].pendingAmt : 0}}
     </div>
   </div>
 
