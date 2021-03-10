@@ -36,7 +36,6 @@ export class CustomerListingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchCustomers(1);
     this.dtOptions = {
 
       // Declare the use of the extension in the dom parameter
@@ -49,6 +48,7 @@ export class CustomerListingComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
     };
+    this.fetchCustomers(1);
 
 
     /* this.searchForm = this.fb.group({
@@ -78,31 +78,4 @@ export class CustomerListingComponent implements OnInit {
     console.log('searchCleared');
     this.data = [];
   }
-
-  /* selectEvent(item) {
-    console.log(item);
-    this.http.post('http://localhost/testslim_1/public/fetchCustomersSearch',{q : item}).subscribe((response:any) => {
-      // console.log(response);
-      if(response.status == true){
-        this.tableData = response.data;
-      }
-      // console.log(this.tableData);
-    });
-    // do something with selected item
-  } */
-
- /*  onChangeSearch(val: string) {
-    this.http.post('http://localhost/testslim_1/public/getCustomerList',{q : val}).subscribe((response:any) => {
-      console.log(response.data);
-      if(response.status == true){
-        this.data = response.data;
-      }else{
-        this.data = [];
-      }
-    });
-  } */
-
-  /* onFocused(e){
-    // do something when input is focused
-  } */
 }
