@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="loader" *ngIf = "isLoading"></div>
 
-<div class="container col-md-8 col-md-offset-4 card mt-2 cardBG" *ngIf = "!isLoading">
+<div class="container col-md-10 col-md-offset-2 card mt-2 cardBG" *ngIf = "!isLoading">
   <h3 style="text-align: center;">Bill Details</h3>
   <form class="px-2 py-2" [formGroup]="billForm" (ngSubmit)="onSubmit(billForm)">
       <input type="hidden" formControlName="noOfItem">
