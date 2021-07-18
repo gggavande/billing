@@ -13,7 +13,7 @@
                         </td>
 
                         <td style="text-align:right;">
-                            Jai Jawan Chauk, Indiranagar,Sangamner.<br>
+                            Jai Jawan Chowk, Indiranagar,Sangamner.<br>
                             Tal.:Sangamner<br>
                             Dist.:Ahmednagar,422605<br>
                             7350442744,8605873175<br>
@@ -34,6 +34,7 @@
                             Invoice #: {{billNo}}<br>
                             Date: {{date | date}}<br>
                             <strong>GST.: 27BEGPG5692M1ZX<br></strong>
+                            <strong>HSN no.: 9015<br></strong>
                             <!-- <strong>PAN No.: BNUPG2300P<br></strong> -->
                             <!-- Account No.: 20200809605<br>
                             IFSC Code : SBIN0013276 -->
@@ -88,13 +89,24 @@
             </tr>
             <tr class="item" *ngIf="gstStatus == 1">
                 <td>
-                    GST (18%)
+                    CGST (9%)
                 </td>
                 <td></td>
                 <td></td>
 
                 <td>
-                    {{gstAmount}}
+                    {{gstAmount/2}}
+                </td>
+            </tr>
+            <tr class="item" *ngIf="gstStatus == 1">
+                <td>
+                    SGST (9%)
+                </td>
+                <td></td>
+                <td></td>
+
+                <td>
+                    {{gstAmount/2}}
                 </td>
             </tr>
             <br>
