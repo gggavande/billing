@@ -12,6 +12,26 @@
           <span>{{billDetails.customer.name}}</span>
       </div>
 
+      <label><strong>Customer Details</strong></label>
+            <div class="form-row row">
+                <div class="col-md-3 form-group">
+                    <label for="">GST No.</label>
+                    <input  type="text" class="form-control" id="gstIn" formControlName="custGst" placeholder="GST In">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="">City</label>
+                    <input type="text" class="form-control" id="addInput" formControlName="custCity" placeholder="Enter City Name" >
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="">Mobile No.</label>
+                    <input type="number" class="form-control" id="mobInput" formControlName="custMob" placeholder="Mobile No" >
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="">Email Id</label>
+                    <input type="email" class="form-control" id="emailInput" formControlName="custEmail" placeholder="Email Id">
+                </div>
+            </div>
+
       <label><strong>Items</strong></label>
       <div *ngIf = "item.length > 0">
         <div class="form-row row" *ngFor="let itemRow of item; let i = index"><!-- *ngFor="let item of [].constructor(itemNo); let i = index" -->
@@ -38,19 +58,19 @@
           <div class="form-row row" *ngFor="let itemRow of [].constructor(newItemNo); let i = index"><!-- *ngFor="let item of [].constructor(itemNo); let i = index" -->
             <div class="col-md-6 form-group">
                   <label for="">Item Name.</label>
-                  <input type="text" class="form-control" id="item{{item.length+1}}" formControlName="item{{item.length+1}}" placeholder="Enter Item Name" >
+                  <input type="text" class="form-control" id="item{{item.length+i+1}}" formControlName="item{{item.length+i+1}}" placeholder="Enter Item Name" >
               </div>
               <div class="col-md-2 form-group">
                   <label for="">Rate.</label>
-                  <input type="number" class="form-control" id="item{{item.length+1}}Rate" formControlName="item{{item.length+1}}Rate" placeholder="Rate" (keyup)="calcAmount(item.length+1)">
+                  <input type="number" class="form-control" id="item{{item.length+i+1}}Rate" formControlName="item{{item.length+i+1}}Rate" placeholder="Rate" (keyup)="calcAmount(item.length+i+1)">
               </div>
               <div class="col-md-2 form-group">
                   <label for="">Unit.</label>
-                  <input type="number" class="form-control itemUnit" id="item{{item.length+1}}Unit" formControlName="item{{item.length+1}}Unit" placeholder="Unit" (keyup)="calcAmount(item.length+1)">
+                  <input type="number" class="form-control itemUnit" id="item{{item.length+i+1}}Unit" formControlName="item{{item.length+i+1}}Unit" placeholder="Unit" (keyup)="calcAmount(item.length+i+1)">
               </div>
               <div class="col-md-2 form-group">
                   <label for="">Amount.</label>
-                  <input  type="number" class="form-control" id="item{{item.length+1}}Price" formControlName="item{{item.length+1}}Price" placeholder="Price">
+                  <input  type="number" class="form-control" id="item{{item.length+i+1}}Price" formControlName="item{{item.length+i+1}}Price" placeholder="Price">
               </div>
           </div>
         </div>

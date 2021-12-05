@@ -32,7 +32,11 @@ export class EditBillComponent implements OnInit {
       isPaid: ['',Validators.required],
       amountReceived: ['0'],
       billId: ['0'],
-      billNo: ['0']
+      billNo: ['0'],
+      custGst : [''],
+      custCity : [''],
+      custMob : [''],
+      custEmail : ['']
     });
     this.fetchBill(this);
   }
@@ -50,6 +54,11 @@ export class EditBillComponent implements OnInit {
         this.billForm.patchValue({amountReceived: this.billDetails.amountReceived});
         this.billForm.patchValue({billId: this.billDetails.billId});
         this.billForm.patchValue({billNo: this.billDetails.billNo});
+
+        this.billForm.patchValue({custCity: this.billDetails.customer.address});
+        this.billForm.patchValue({custGst: this.billDetails.customer.gst_no});
+        this.billForm.patchValue({custMob: this.billDetails.customer.mobile});
+        this.billForm.patchValue({custEmail: this.billDetails.customer.email});
         var i = 0;
         response.data.item.forEach(function (row) {
           // console.log(row);
@@ -72,11 +81,11 @@ export class EditBillComponent implements OnInit {
     });
   }
 
-  calcAmount(ind : number){
+  calcAmount(ind : any){
     let rate : any = this.billForm.get('item'+ind+'Rate').value;
     let unit : any = this.billForm.get('item'+ind+'Unit').value;
     if(rate && unit){
-      let price = parseInt(rate)*parseInt(unit);
+      let price = rate*unit;
       this.billForm.patchValue({['item'+ind+'Price']: price});
     }
   }

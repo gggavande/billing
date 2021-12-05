@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="invoice-box mt-2" >
-    <table cellpadding="0" cellspacing="0" >
+    <table cellpadding="0" cellspacing="0">
         <tr class="top">
             <td colspan="2">
                 <table>
@@ -16,11 +16,11 @@
                             Jai Jawan Chowk, Indiranagar,Sangamner.<br>
                             Tal.:Sangamner<br>
                             Dist.:Ahmednagar,422605<br>
-                            7350442744,8605873175<br>
+                            7350442744,9850179535<br>
                             gavandebrothers@gmail.com
                         </td>
                     </tr>
-                    <!-- <strong>Prop</strong>: Somnath Arun Gavande -->
+                    <strong>Prop</strong>:<strong>Somnath Arun Gavande</strong> 
                 </table>
         <hr>
             </td>
@@ -33,7 +33,7 @@
                         <td>
                             Invoice #: {{billNo}}<br>
                             Date: {{date | date}}<br>
-                            <strong>GST.: 27BEGPG5692M1ZX<br></strong>
+                            <strong>GST.:27BNUPG2300P1ZN <br></strong>
                             <strong>HSN no.: 9015<br></strong>
                             <!-- <strong>PAN No.: BNUPG2300P<br></strong> -->
                             <!-- Account No.: 20200809605<br>
@@ -42,9 +42,14 @@
                         </td>
 
                         <td>
-                            {{customerName}}.<br>
+                            <u><strong>Costomer Deatils</strong></u><br>
+                            <strong>{{customerName}}.</strong><br>
+                            <span *ngIf = "customerAdd != ''"><strong>{{customerAdd}}</strong></span>
+                            <br *ngIf = "customerEmail != ''">
                             <span *ngIf = "customerEmail != ''">{{customerEmail}}.<br> </span>
                             {{customerMobile}}
+                            <br *ngIf = "customerGst != ''">
+                            <span *ngIf = "customerGst != ''"><strong>GST No.:</strong> <strong>{{customerGst}}</strong></span>
                         </td>
                     </tr>
                 </table>
@@ -113,7 +118,7 @@
 
             <tfoot class="itemBord">
                 <tr>
-                    <td><strong>Total</strong></td>
+                    <td><strong>Total Amount</strong></td>
 
                     <td colspan="3">
                     {{amount}}

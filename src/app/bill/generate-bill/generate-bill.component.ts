@@ -33,7 +33,11 @@ export class GenerateBillComponent implements OnInit {
       item1: ['',Validators.required],
       item1Rate: [''],
       item1Unit: [''],
-      item1Price: [{value:''},Validators.required]
+      item1Price: [{value:''},Validators.required],
+      custGst : [''],
+      custCity : [''],
+      custMob : [''],
+      custEmail : ['']
 
     });
 
@@ -66,11 +70,13 @@ export class GenerateBillComponent implements OnInit {
     });
   }
 
-  calcAmount(ind : number){
+  calcAmount(ind : any){
     let rate : any = this.billForm.get('item'+ind+'Rate').value;
     let unit : any = this.billForm.get('item'+ind+'Unit').value;
+    // console.log(unit);
     if(rate && unit){
-      let price = parseInt(rate)*parseInt(unit);
+      // let price = parseInt(rate)*parseInt(unit);
+      let price = rate*unit;
       this.billForm.patchValue({['item'+ind+'Price']: price});
     }
   }
@@ -112,6 +118,12 @@ export class GenerateBillComponent implements OnInit {
 
   selectEvent(item) {
     console.log(item);
+    console.log('9999999');
+
+    this.billForm.patchValue({custCity: item.address});
+    this.billForm.patchValue({custGst: item.gst_no});
+    this.billForm.patchValue({custMob: item.mobile});
+    this.billForm.patchValue({custEmail: item.email});
     // do something with selected item
   }
 

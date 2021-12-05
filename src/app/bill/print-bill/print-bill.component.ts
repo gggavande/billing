@@ -21,6 +21,8 @@ export class PrintBillComponent implements OnInit {
   customerEmail : any;
   customerMobile : any;
   amountInWords : string;
+  customerGst : any;
+  customerAdd: any;
 
   constructor(private http : HttpClient, private router: Router, private route: ActivatedRoute,private helpers : HelperFunctionService) {
     this.route.paramMap.subscribe(params => {
@@ -39,6 +41,8 @@ export class PrintBillComponent implements OnInit {
         this.customerName = response.data.customer.name;
         this.customerEmail = response.data.customer.email;
         this.customerMobile = response.data.customer.mobile;
+        this.customerGst = response.data.customer.gst_no;
+        this.customerAdd = response.data.customer.address;
 
         this.billDetails = response.data;
         this.amountInWords = this.helpers.numToWord(response.data.amount);
